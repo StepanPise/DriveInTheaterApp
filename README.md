@@ -1,9 +1,7 @@
 **Drive-In Theater Application**
 
-![tnpwScreen](https://github.com/user-attachments/assets/0e9e0995-838e-4fd1-9161-636644ceb905)
-
-![image](https://github.com/user-attachments/assets/97c0ac2f-3070-4001-8e34-6e8dc91a2dea)
-
+![tnpwScreen (1)](https://github.com/user-attachments/assets/63e2669f-b2c4-472b-884b-320fac0b45d8)
+![tnpwScreen2 (1)](https://github.com/user-attachments/assets/6f3a6b4d-f166-4cec-a0cf-40001c3e1cf8)
 
 **Technologies Used**
 
