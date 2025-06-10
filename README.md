@@ -8,18 +8,19 @@ A web application for browsing and managing movie screenings. Users can explore 
 ## Getting Started
 
 ### Database Initialization:
-* First, you need to use the provided configuration file docker-compose.yml. You have to run database.src.DockerManager.main
+* First, you need to use the provided configuration file docker-compose.yml. You have to run DockerManager.src.DockerManager class and choose the desired database setup by modifying the main() method.
+For example, to reset and start the database, call ResetAndBoot().
 
 * Or you can just run this command in the terminal (in the folder with the docker-compose.yml file): **docker compose up -d**
 
-This will create a container with a Postgres database on port **5433** and a volume named database_pgdata where the database data is stored.
+This will create a container with a Postgres database on port **5433** and a volume named docktnpw_pgdata where the database data is stored.
 
 ### Starting the Application:
 * First, install all required dependencies from pom.xml by running the command: **mvn install**
 
 * Or, preferably, use the graphical interface of IntelliJ IDEA to do this automatically.
 
-Then simply run the src.main.java.DbsProjectApplication.main class, and the application will be available at http://localhost:8080/.
+Then simply run the src.main.java.DriveinTheaterApplication class, and the application will be available at http://localhost:8080/.
 
 ### Login:
 
