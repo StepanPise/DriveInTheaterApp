@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${movie.title}"></title>
+    <link th:href="@{/navbar.css}" rel="stylesheet">
+    <link th:href="@{/movie-detail.css}" rel="stylesheet">
+    <link rel="stylesheet" href="background.css">
+
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="main-content">
+
+    <h1 th:text="${movie.title}"></h1>
+
+    <img th:src="@{/images/{img}.jpg(img=${movie.imageUrl})}" alt="Movie image" style="width: 300px; height: auto;">
+
+    <p th:text="${movie.description}"></p>
+
+    <h2>Projekce:</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Čas projekce</th>
+            <th>Akce</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="screening : ${screenings}">
+            <td th:text="${screening.screeningTime.format(formatter)}"></td>
+            <td>
+                <a th:href="@{'/screenings/' + ${screening.id} + '/seats'}" class="btn-primary">Rezervovat</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

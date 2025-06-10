@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Movies</title>
+    <link th:href="@{/navbar.css}" rel="stylesheet">
+    <link th:href="@{/movies.css}" rel="stylesheet">
+    <link rel="stylesheet" href="background.css">
+
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h1>Filmy</h1>
+
+<!-- Formular pro vyhledavani -->
+<div class="search-bar">
+    <form action="#" method="get" th:action="@{/movies/search}">
+        <input type="text" name="query" placeholder="Vyhledat film" />
+        <button type="submit">Hledat</button>
+    </form>
+</div>
+
+<!-- Seznam filmu -->
+<div class="movie-grid">
+    <div class="movie-card" th:each="movie : ${movies}">
+        <a th:href="@{/movies/{id}(id=${movie.id})}">
+            <img th:src="@{/images/{img}.jpg(img=${movie.imageUrl})}" alt="Movie image">
+            <p th:text="${movie.title}">Název</p>
+        </a>
+    </div>
+</div>
+
+<!-- Tlacitko pro pridani filmu jen pro ADMIN -->
+<div sec:authorize="hasRole('ADMIN')">
+    <!-- Tlacitko pro pridani filmu -->
+    <div class="add-movie">
+        <a href="#add-movie-modal" class="btn-primary">+</a>
+    </div>
+
+    <!-- Modalni okno pro pridani filmu -->
+    <div id="add-movie-modal" class="modal">
+        <div class="modal-content">
+            <h2>Přidat nový film</h2>
+            <form th:action="@{/movies/add}" method="post">
+                <label for="title">Název:</label>
+                <input type="text" id="title" name="title" required><br>
+
+                <label for="description">Popis:</label>
+                <textarea id="description" name="description" required></textarea><br>
+
+                <label for="genre">Žánr:</label>
+                <input type="text" id="genre" name="genre" required><br>
+
+                <label for="durationMinutes">Trvání (v minutách):</label>
+                <input type="number" id="durationMinutes" name="durationMinutes" required><br>
+
+                <label for="imageUrl">URL obrázku:</label>
+                <input type="text" id="imageUrl" name="imageUrl" required><br>
+
+                <button type="submit">Přidat film</button>
+            </form>
+            <button class="close-btn">Zavřít</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Pripojeni JavaScriptu -->
+<script src="/js/movies.js"></script>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

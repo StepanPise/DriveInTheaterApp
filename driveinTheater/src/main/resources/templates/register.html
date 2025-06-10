@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrace</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/register.css">
+</head>
+<body>
+<div class="login-container">
+    <h2>Registrace</h2>
+
+    <div th:if="${error}" class="error-message" style="color: red; text-align: center; margin-bottom: 20px;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:action="@{/register}" method="post">
+        <label for="username">Uživatelské jméno:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Heslo:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit">Registrovat</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Program</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/navbar.css}" rel="stylesheet">
+    <link th:href="@{/program.css}" rel="stylesheet">
+    <link rel="stylesheet" href="background.css">
+
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h1 th:if="${!showAll}">Program na den <span th:text="${#temporals.format(currentDate, 'dd.MM.yyyy')}">Datum</span></h1>
+<h1 th:if="${showAll}">Všechny projekce</h1>
+
+<!-- Toggle -->
+<div class="toggle-view">
+    <a th:if="${!showAll}" th:href="@{'/program'(showAll=true)}">Zobrazit všechny projekce</a>
+    <a th:if="${showAll}" th:href="@{'/program'(showAll=false)}">Zobrazit po dnech</a>
+</div>
+
+<!-- Navigace mezi dny -->
+<div th:if="${!showAll}" class="day-navigation">
+    <a th:href="@{'/program'(dayOffset=${dayOffset - 1}, showAll=false)}">&larr; Předchozí den</a>
+    <a th:href="@{'/program'(dayOffset=${dayOffset + 1}, showAll=false)}">Další den &rarr;</a>
+</div>
+
+<!-- ALL -->
+<div th:if="${#lists.isEmpty(screenings)}" class="card-empty">
+    <p>Žádné projekce k zobrazení.</p>
+</div>
+
+<div class="card-container" th:each="screening : ${screenings}">
+    <div class="card">
+        <div class="card-body">
+            <img th:src="@{/images/{img}.jpg(img=${screening.movie.imageUrl})}" alt="Movie image">
+            <h5 class="card-title" th:text="${screening.movie.title}">Název filmu</h5>
+            <p class="card-text">
+                Datum a čas:
+                <span th:text="${#temporals.format(screening.screeningTime, 'dd.MM.yyyy HH:mm')}">Datum</span>
+            </p>
+            <a th:href="@{/screenings/{id}/seats(id=${screening.id})}" class="btn btn-primary">Rezervovat</a>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

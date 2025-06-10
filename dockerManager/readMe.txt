@@ -1,0 +1,1 @@
+Docker manager pro spusteni databaze

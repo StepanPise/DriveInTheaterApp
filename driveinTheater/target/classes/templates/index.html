@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Drive-In Theater</title>
+    <link th:href="@{/navbar.css}" rel="stylesheet">
+    <link th:href="@{/homepage.css}" rel="stylesheet">
+    <link rel="stylesheet" href="background.css">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- HLAVNI OBSAH -->
+<div class="main-content">
+    <h1>Vítejte v Drive-In Theater 🎬</h1>
+    <p>Prohlédněte si dostupné filmy a rezervujte si místo.</p>
+
+    <div class="upcoming-section">
+        <h2>Nejbližší představení</h2>
+
+        <div th:if="${#lists.isEmpty(upcomingScreenings)}" class="card-empty">
+            <p>Žádná nadcházející představení.</p>
+        </div>
+
+        <div class="card-container">
+            <div class="card" th:each="screening : ${upcomingScreenings}">
+                <div class="card-body">
+                    <img th:src="@{/images/{img}.jpg(img=${screening.movie.imageUrl})}" alt="Obrázek filmu">
+                    <h5 class="card-title" th:text="${screening.movie.title}">Název filmu</h5>
+                    <p class="card-text">
+                        Datum a čas:
+                        <span th:text="${#temporals.format(screening.screeningTime, 'dd.MM.yyyy HH:mm')}">Datum</span>
+                    </p>
+                    <a th:href="@{/screenings/{id}/seats(id=${screening.id})}" class="btn-primary">Rezervovat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

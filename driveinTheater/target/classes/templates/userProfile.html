@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profil uživatele</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/navbar.css}" rel="stylesheet">
+    <link th:href="@{/userProfile.css}" rel="stylesheet">
+    <link rel="stylesheet" href="background.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Hlavni obsah -->
+<div class="main-content">
+    <div class="profile-container">
+        <h1>Profil uživatele</h1>
+        <p><strong>Uživatelské jméno:</strong> <span th:text="${user.username}">username</span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+    </div>
+
+    <h2>Vaše rezervace</h2>
+
+    <div th:if="${#lists.isEmpty(reservations)}">
+        <p>Nemáte žádné rezervace.</p>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(reservations)}">
+        <table>
+            <thead>
+            <tr>
+                <th>Film</th>
+                <th>Čas</th>
+                <th>Místo</th>
+                <th>Akce</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="res : ${reservations}">
+                <td th:text="${res.screening.movie.title}">Film</td>
+                <td th:text="${#temporals.format(res.screening.screeningTime, 'dd.MM.yyyy HH:mm')}">Čas</td>
+                <td th:text="${res.parkingSpot}">---</td>
+                <td>
+                    <form th:action="@{/reservations/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="reservationId" th:value="${res.id}" />
+                        <button type="submit" class="btn-primary">Zrušit</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form th:action="@{/reservations/deleteAll}" method="post">
+        <button type="submit" class="btn-primary">Smazat všechny rezervace</button>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

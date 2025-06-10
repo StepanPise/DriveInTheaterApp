@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/navbar.css}" rel="stylesheet">
+    <link th:href="@{/homepage.css}" rel="stylesheet">
+    <link rel="stylesheet" href="background.css">
+
+    <title>Potvrzení rezervace</title>
+</head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="main-content">
+        <h1>Rezervace potvrzena!</h1>
+        <p>Děkujeme, <span th:text="${user.username}">uživateli</span>!</p>
+        <p>Vaše místo: <strong th:text="${reservation.parkingSpot}">A1</strong></p>
+        <p>Promítání: <strong th:text="${screening.movie.title}">Film</strong> v <span th:text="${screening.screeningTime}">čas</span></p>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
