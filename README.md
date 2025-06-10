@@ -11,7 +11,7 @@ A web application for browsing and managing movie screenings. Users can explore 
 * First, you need to use the provided configuration file docker-compose.yml. You have to run DockerManager.src.DockerManager class and choose the desired database setup by modifying the main() method.
 For example, to reset and start the database, call ResetAndBoot().
 
-* Or you can just run this command in the terminal (in the folder with the docker-compose.yml file): **docker compose up -d**
+* Or you can run this command in the terminal (in the folder with the docker-compose.yml file): **docker compose up -d** and modify the main() method in DockerManager class.
 
 This will create a container with a Postgres database on port **5433** and a volume named docktnpw_pgdata where the database data is stored.
 
